@@ -1,0 +1,10 @@
+/*
+!inputs/
+!*.input
+!*.fut
+!*.py
+!futhark.pkg
+!.gitignore
+!README.md
+!Makefile
+!.github
