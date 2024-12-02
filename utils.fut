@@ -21,7 +21,7 @@ module words
       |> (id &&& rotate 1)
       |> uncurry zip
       |> zip (indices s)
-      |> filter (\(_, (x, y)) -> x > y)
+      |> filter (\(i, (x, y)) -> (i == n - 1 && x > 0) || x > y)
       |> map (\(i, (x, _)) -> ([], i - x + 1, x))
     )
 }

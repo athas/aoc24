@@ -127,10 +127,20 @@ def nub lte xs =
   in zip (idxs xs) xs |> sort lte1 |> pack lte2 |> sort lte3 |> map (.1)
 
 def count p xs = xs |> map p |> map i64.bool |> i64.sum
+def count32 p xs = count p xs |> i32.i64
 
 def dtoi (c: u8) : i64 = i64.u8 c - '0'
 def is_digit (c: u8) = c >= '0' && c <= '9'
 def isnt_digit = not <-< is_digit
+
+def atoi32 [n] (s: [n]u8) =
+  let (sign, s) = if n > 0 && s[0] == '-' then (-1, drop 1 s) else (1, s)
+  in sign
+     * (loop (acc, i) = (0, 0)
+        while i < length s do
+          if is_digit s[i]
+          then (acc * 10 + i32.i64 (dtoi s[i]), i + 1)
+          else (acc, n)).0
 
 def atoi [n] (s: [n]u8) : i64 =
   let (sign, s) = if n > 0 && s[0] == '-' then (-1, drop 1 s) else (1, s)
