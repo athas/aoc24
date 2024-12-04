@@ -1,3 +1,5 @@
+-- Straightforward parallel brute force.
+
 import "utils"
 
 def parse (s: string []) =

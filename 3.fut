@@ -1,3 +1,5 @@
+-- Delightful parallel approach, with the scan in particular.
+
 import "utils"
 
 def read_mul (s: string []) =
