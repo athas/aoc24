@@ -44,5 +44,11 @@ def crossmasses [n] [m] (A: [n][m]char) =
 entry part2 s = parse s |> crossmasses
 
 -- ==
+-- entry: part1
 -- script input { $loadbytes "inputs/4.input" }
 -- output { 2493 }
+
+-- ==
+-- entry: part2
+-- script input { $loadbytes "inputs/4.input" }
+-- output { 1890 }
