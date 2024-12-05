@@ -82,7 +82,7 @@ def count 'a (p: a -> bool) (xs: []a) : i64 =
 def index_of_first p xs =
   loop i = 0 while i < length xs && !p xs[i] do i + 1
 
-def span p xs = let i = index_of_first p xs in (take i xs, drop i xs)
+def span p xs = let i = (let p = p in index_of_first p xs) in (take i xs, drop i xs)
 
 def windows k s =
   map (\i -> take k (drop i s)) (take (length s - k) (indices s))
