@@ -82,7 +82,7 @@ def count 'a (p: a -> bool) (xs: []a) : i64 =
 def index_of_first p xs =
   loop i = 0 while i < length xs && !p xs[i] do i + 1
 
-def span p xs = let i = (let p = p in index_of_first p xs) in (take i xs, drop i xs)
+def span p xs = let i = index_of_first p xs in (take i xs, drop i xs)
 
 def windows k s =
   map (\i -> take k (drop i s)) (take (length s - k) (indices s))
@@ -138,3 +138,6 @@ def hist_2d 'a [k] (op: a -> a -> a) (ne: a) (n: i64) (m: i64) (is: [k](i64, i64
   reduce_by_index_2d (replicate n (replicate m ne)) op ne is as
 
 def arreq eq xs ys = and (map2 eq xs ys)
+
+def in_bounds 't [n] [m] (i, j) (_: [n][m]t) =
+  i >= 0 && i < n && j >= 0 && j < m
