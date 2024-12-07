@@ -9,8 +9,6 @@ import "utils"
 
 def max_nums : i64 = 12
 
-def testinput = "190: 10 19\n3267: 81 40 27\n83: 17 5\n156: 15 6\n7290: 6 8 6 15\n161011: 16 10 13\n192: 17 8 14\n21037: 9 7 18 13\n292: 11 6 16 20\n"
-
 def parse (s: string []) : [](i64, [max_nums]i64) =
   let (get, ls) = lines.lines s
   let on_line l =
@@ -38,7 +36,8 @@ def eval (xs: [max_nums]i64) (mask: u32) =
 entry part1 (s: string []) =
   let eqs = parse s
   let solvable (lhs, rhs) =
-    i64.bool (tabulate (1 << max_nums) (\i -> eval rhs (u32.i64 i))
+    i64.bool (tabulate (1 << index_of_first (== 0) rhs)
+                       (\i -> eval rhs (u32.i64 i))
               |> any (== lhs))
     * lhs
   in map solvable eqs |> i64.sum
@@ -54,12 +53,12 @@ def eval_ternary (xs: [max_nums]i64) (mask: u32) =
   (.0)
   <| loop (res, i, mask) = (xs[0], 1, mask)
   while i < i32.i64 max_nums && xs[i] != 0 do
-    ( match mask % 3
+    ( match mask %% 3
       case 0 -> res + xs[i]
       case 1 -> res * xs[i]
       case _ -> res * 10 ** decdigits xs[i] + xs[i]
     , i + 1
-    , mask / 3
+    , mask // 3
     )
 
 entry part2 (s: string []) =
@@ -70,7 +69,7 @@ entry part2 (s: string []) =
        <| loop (_, i) = (0, 0)
        while i < 3 ** k do
          if eval_ternary rhs (u32.i64 i) == lhs
-         then (lhs, 3 ** max_nums)
+         then (lhs, 3 ** k)
          else (0, i + 1)
   in map solvable eqs |> i64.sum
 
