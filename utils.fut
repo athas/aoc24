@@ -141,3 +141,10 @@ def arreq eq xs ys = and (map2 eq xs ys)
 
 def in_bounds 't [n] [m] (i, j) (_: [n][m]t) =
   i >= 0 && i < n && j >= 0 && j < m
+
+def gcd (a: i64) (b: i64) : i64 =
+  let (x, _) =
+    loop (x, y) = (a, b)
+    while y != 0 do
+      (y, x % y)
+  in x
