@@ -129,6 +129,7 @@ def nub lte xs =
 def count p xs = xs |> map p |> map i64.bool |> i64.sum
 def count32 p xs = count p xs |> i32.i64
 
+def dtoi32 (c: u8) : i32 = i32.u8 c - '0'
 def dtoi (c: u8) : i64 = i64.u8 c - '0'
 def is_digit (c: u8) = c >= '0' && c <= '9'
 def isnt_digit = not <-< is_digit
