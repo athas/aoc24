@@ -28,13 +28,3 @@ entry part1 (s: string []) =
               , prev_used disk' j
               )
   in checksum disk
-
-entry file_ending_at (disk: []i64) j : i64 =
-  let b = disk[j]
-  in 1 + loop j while disk[j] == b do j - 1
-
-def next_free (disk: []i64) i =
-  loop i while disk[i] != -1i64 do i + 1
-
-def next_used (disk: []i64) i =
-  loop i while disk[i] == -1i64 do i + 1
